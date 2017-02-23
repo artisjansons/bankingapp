@@ -1,0 +1,35 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+---
+
+spring:
+  profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+logging:
+  level:
+    org.springframework.web: debug
+    org.hibernate: debug
+    com.example.bankingapp: debug
+
+---
+spring:
+  profiles: production
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking_app_db
+    username: production_user
+    password: verysafepassword
+logging:
+  level:
+    org.springframework.web: warn
+    org.hibernate: warn
+    com.example.bankingapp: warn
+
+

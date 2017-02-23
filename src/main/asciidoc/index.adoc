@@ -1,0 +1,234 @@
+= Banking Service Getting Started Guide
+Artis Jansons;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[introduction]
+= Introduction
+
+Banking service is a RESTful microservice for managing user accounts, deposit and withdraw money.
+
+[overview]
+= Overview
+Banking service provides only client specific functionality.
+All resources are secured with authentication except <<Creating new user, creating new user>> request.
+Secured resources can be accessible using Basic authorization (username (email) and Password) or using x-auth-token request header.
+On successful Basic authorization x-auth-token will be exposed in response headers for further use, instead of
+using your credentials every time.
+
+[[overview-http-verbs]]
+== HTTP verbs
+Service tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update existing resource
+
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+Service tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| Standard response for successful HTTP requests.
+The actual response will depend on the request method used.
+In a GET request, the response will contain an entity corresponding to the requested resource.
+In a POST request, the response will contain an entity describing or containing the result of the action.
+
+| `201 Created`
+| The request has been fulfilled and resulted in a new resource being created.
+
+| `400 Bad Request`
+| The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).
+
+| `404 Not Found`
+| The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible.
+
+|===
+
+[[resources]]
+= Resources
+
+[[resources-user]]
+== User
+The User resource is used to create, update and get person data.
+
+=== Creating new user
+A `POST` request creates a new user.
+
+==== Request Structure
+include::{snippets}/user-controller-test/test-create-user/http-request.adoc[]
+
+==== Request Fields
+include::{snippets}/user-controller-test/test-create-user/request-fields.adoc[]
+
+==== Response fields
+include::{snippets}/user-controller-test/test-create-user/response-fields.adoc[]
+
+==== Example response
+include::{snippets}/user-controller-test/test-create-user/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-controller-test/test-create-user/curl-request.adoc[]
+
+
+=== Get user data
+A `GET` request gets user data.
+
+==== Request Structure
+include::{snippets}/user-controller-test/test-get-user/http-request.adoc[]
+
+==== Request headers
+include::{snippets}/user-controller-test/test-get-user/request-headers.adoc[]
+
+==== Response fields
+include::{snippets}/user-controller-test/test-get-user/response-fields.adoc[]
+
+==== Response headers
+include::{snippets}/user-controller-test/test-get-user/response-headers.adoc[]
+
+==== Example response
+include::{snippets}/user-controller-test/test-get-user/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-controller-test/test-get-user/curl-request.adoc[]
+
+
+=== Updating existing user
+A `PUT` updates existing authenticated user.
+
+==== Request Structure
+include::{snippets}/user-controller-test/test-update-user/http-request.adoc[]
+
+==== Request headers
+include::{snippets}/user-controller-test/test-get-user/request-headers.adoc[]
+
+==== Request Fields
+include::{snippets}/user-controller-test/test-update-user/request-fields.adoc[]
+
+==== Example response
+include::{snippets}/user-controller-test/test-update-user/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-controller-test/test-update-user/curl-request.adoc[]
+
+
+[[resources-user-sccount]]
+== User Account
+The User Account resource is used to create, get and list user accounts.
+
+=== Creating new user account
+A `POST` request creates a new user account.
+
+==== Request Structure
+include::{snippets}/user-account-controller-test/test-create-account/http-request.adoc[]
+
+==== Request Headers
+include::{snippets}/user-account-controller-test/test-create-account/request-headers.adoc[]
+
+==== Response fields
+include::{snippets}/user-account-controller-test/test-create-account/response-fields.adoc[]
+
+==== Example response
+include::{snippets}/user-account-controller-test/test-create-account/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-account-controller-test/test-create-account/curl-request.adoc[]
+
+
+=== Get user account
+A `GET` request returns particular user account data.
+
+==== Request Structure
+include::{snippets}/user-account-controller-test/test-get-account/http-request.adoc[]
+
+==== Path parameters
+include::{snippets}/user-account-controller-test/test-get-account/path-parameters.adoc[]
+
+==== Request Headers
+include::{snippets}/user-account-controller-test/test-get-account/request-headers.adoc[]
+
+==== Response fields
+include::{snippets}/user-account-controller-test/test-get-account/response-fields.adoc[]
+
+==== Example response
+include::{snippets}/user-account-controller-test/test-get-account/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-account-controller-test/test-get-account/curl-request.adoc[]
+
+
+=== List user accounts
+A `GET` request lists user accounts.
+
+==== Request Structure
+include::{snippets}/user-account-controller-test/test-list-accounts/http-request.adoc[]
+
+==== Request Headers
+include::{snippets}/user-account-controller-test/test-list-accounts/request-headers.adoc[]
+
+==== Response fields
+include::{snippets}/user-account-controller-test/test-list-accounts/response-fields.adoc[]
+
+==== Example response
+include::{snippets}/user-account-controller-test/test-list-accounts/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-account-controller-test/test-list-accounts/curl-request.adoc[]
+
+[[resources-user-sccount-deposit]]
+== User Account Deposit
+The User Account Deposit resource is used to deposit on existing account.
+
+=== Deposit
+A `POST` request deposits on account.
+
+==== Request Structure
+include::{snippets}/user-account-deposit-controller-test/test-deposit/http-request.adoc[]
+
+==== Request Headers
+include::{snippets}/user-account-deposit-controller-test/test-deposit/request-headers.adoc[]
+
+==== Example response
+include::{snippets}/user-account-deposit-controller-test/test-deposit/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-account-deposit-controller-test/test-deposit/curl-request.adoc[]
+
+
+[[resources-user-sccount-withdraw]]
+== User Account Withdraw
+The User Account Withdraw resource is used to withdraw money from existing account.
+
+=== Withdraw
+A `POST` request withdraws money from account.
+
+==== Request Structure
+include::{snippets}/user-account-withdraw-controller-test/test-withdraw/http-request.adoc[]
+
+==== Request Headers
+include::{snippets}/user-account-withdraw-controller-test/test-withdraw/request-headers.adoc[]
+
+==== Example response
+include::{snippets}/user-account-withdraw-controller-test/test-withdraw/http-response.adoc[]
+
+==== CURL request
+include::{snippets}/user-account-withdraw-controller-test/test-withdraw/curl-request.adoc[]
